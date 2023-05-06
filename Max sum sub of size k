@@ -1,0 +1,24 @@
+
+
+//User function Template for Java
+class Solution{
+    static long maximumSumSubarray(int K, ArrayList<Integer> Arr,int N){
+        int i=0,j=0;long sum=0;long max=-1;
+        int end=Arr.size()-1;
+        while(j<=end)
+        {
+            sum+=Arr.get(j);
+            if(j-i+1<K){
+                j++;
+            }
+            else
+            {
+                if(sum>max){max=sum;}
+                sum-=Arr.get(i);
+                i++;
+                j++;
+            }
+            
+        }
+        return max;    }
+}
