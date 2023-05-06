@@ -1,0 +1,65 @@
+class Solution {
+    public int search(String p, String s) {
+        Map<Character,Integer> Map1=new HashMap<>();
+        Map<Character,Integer> Map2=new HashMap<>();
+        ArrayList<Integer>m=new ArrayList<>();        
+
+        for(int i=0;i<p.length();i++)
+        {
+            if(Map1.containsKey(p.charAt(i)))
+            {
+                Map1.put(p.charAt(i),Map1.get(p.charAt(i))+1);
+            }
+            else
+            {
+                Map1.put(p.charAt(i),1);
+            }
+        }
+
+        int i=0;
+        int j=0;
+        int size=p.length();
+        int length=s.length();
+        while(j<length)
+        {
+            if(Map2.containsKey(s.charAt(j)))
+            {
+                Map2.put(s.charAt(j),Map2.get(s.charAt(j))+1);
+            }
+            else if(!Map2.containsKey(s.charAt(j)))
+            {
+                Map2.put(s.charAt(j),1);
+            }
+            if((j-i+1)<size)
+            {
+                j++;
+            }
+            else if((j-i+1)==size)
+            {
+                if(Map1.equals(Map2))
+                {
+                    m.add(1);
+                }
+                
+                if((Map2.get(s.charAt(i))-1)==0)
+                {
+                    Map2.remove(s.charAt(i));
+                }
+                else if(Map2.get(s.charAt(i))-1!=0)
+                {
+
+                    Map2.put(s.charAt(i),Map2.get(s.charAt(i))-1);
+                }
+                i++;
+                j++;
+            }
+            
+        }
+    int sum=0;
+    for(int u=0;u<m.size();u++)
+    {
+        sum=sum+m.get(u);
+    }
+    return sum;
+    }
+}
